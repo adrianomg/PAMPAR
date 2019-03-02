@@ -1,5 +1,5 @@
 # PAMPAR
-A parallel benchmark for evaluation of parallel programing interfaces.
+A parallel benchmark to evaluate parallel programing interfaces.
 
 There are 13 parallel applications, each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation).
 
