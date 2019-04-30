@@ -3,7 +3,7 @@ In this project we aim to build a parallel benchmark to evaluate parallel progra
 
 In our research we found out that there is no benchmark focused on comparing parallel programing interfaces.
 
-This is a initial work. Currently the benchmark consists of 13 parallel pseudo-applications, each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation).
+This is a initial work and we still updating these applications. Currently the benchmark consists of 13 parallel pseudo-applications, each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation).
 
 The pseudo-aplications are:
   - Pi Caluculation       (PI);
