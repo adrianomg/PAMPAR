@@ -82,7 +82,7 @@ void gramschmidt(int numProc){
 				tmp += (Q[(i*N)+k] * Q[(i*N)+k]);
 		}
 		for(i=0;i<numProc;i++){
-			MPI_Recv(&tmp_aux, 1, MPI_FLOAT, 0, 99, interCommPai[i], MPI_STATUS_IGNORE);
+			//MPI_Recv(&tmp_aux, 1, MPI_FLOAT, 0, 99, interCommPai[i], MPI_STATUS_IGNORE);
 			MPI_Waitany(numProc, request, &source, MPI_STATUS_IGNORE);
 			tmp += tmp_aux[source];
 		}
@@ -106,7 +106,7 @@ void gramschmidt(int numProc){
 				tmp += Q[(i*N)+k] * Q[(i*N)+j];
 			}
 			for(i=0;i<numProc;i++){
-				MPI_Recv(&tmp_aux, 1, MPI_FLOAT, 0, 99, interCommPai[i], MPI_STATUS_IGNORE);
+				//MPI_Recv(&tmp_aux, 1, MPI_FLOAT, 0, 99, interCommPai[i], MPI_STATUS_IGNORE);
 				MPI_Waitany(numProc, request, &source, MPI_STATUS_IGNORE);
 				tmp += tmp_aux[source];
 			}
