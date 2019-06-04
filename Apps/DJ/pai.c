@@ -73,7 +73,7 @@ void ajustaChunk(int size){
 int main(int argc, char **argv){
 
 	if (argc < 5) {
-		printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <input-size> <input-file> <n-child-proc> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program 2048 2048.txt 3 "$PWD/child"\n\n");
+		printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <input-size> <input-file> <n-child-proc> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program 2048 2048.txt 3 \"$PWD/child\"\n\n");
 		exit(1);
 	}
 

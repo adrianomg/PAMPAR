@@ -46,7 +46,7 @@ void calculaCelulas(unsigned short int *matriz, int nTotal){
 int main(int argc, char **argv){
 
 	if (argc < 4) {
-		printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <input-file> <n-child-proc> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program 2048.txt 3 "$PWD/child"\n\n");
+		printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <input-file> <n-child-proc> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program 2048.txt 3 \"$PWD/child\"\n\n");
 		exit(1);
 	}
 

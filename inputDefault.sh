@@ -3,10 +3,10 @@
 #Setup file
 
 #set of parallel tasks to run
-declare -a threads=("2" "4" "8" "16" "20")
+declare -a threads=("2" "4" "8" "16")
 
 #Number of executions
-EXECNUMBER=1
+EXECNUMBER=10
 
 #small, medium, large, debug
 SIZE=medium

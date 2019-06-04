@@ -123,7 +123,7 @@ void gramschmidt(int numProc){
 int main(int argc, char **argv){
 
 	if (argc < 4) {
-		printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <n-child-proc> <input-size> <child-proc>\n\n \tE.g. -> mpirun -np 1 ./my_program 3 2048 "$PWD/child"\n\n");
+		printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <n-child-proc> <input-size> <child-proc>\n\n \tE.g. -> mpirun -np 1 ./my_program 3 2048 \"$PWD/child\"\n\n");
 		exit(1);
 	}
 
