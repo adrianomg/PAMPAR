@@ -17,35 +17,32 @@ void gramschmidt(){
 	for(k=0;k<N;k++){
 		tmp = 0;
 		tmp_local = 0;
-		//for(i=ini; i< fim; i++){
-		//	tmp += (Q[(i*N)+k] * Q[(i*N)+k]);
-		//}
+		for(i=ini; i< fim; i++){
+			tmp += (Q[(i*N)+k] * Q[(i*N)+k]);
+		}
 		MPI_Irecv(&tmp_aux, 1, MPI_FLOAT, 0, 99, interCommPai, &request);
 		MPI_Send(&tmp,1, MPI_FLOAT, 0, 99, interCommPai);
-		//MPI_Recv(&tmp, 1, MPI_FLOAT, 0, 99, interCommPai, MPI_STATUS_IGNORE);				
 		MPI_Wait(&request, MPI_STATUS_IGNORE);
-		//tmp = tmp_aux;
+		tmp = tmp_aux;
 		
-		//for(i=0; i<N; i++){
-		//	Q[(i*N)+k] /= tmp;
-		//}
+		for(i=0; i<N; i++){
+			Q[(i*N)+k] /= tmp;
+		}
 
 		for(j=k+1; j<N;j++){
 			tmp = 0;
-			//for(i=ini; i < fim; i++){
-			//	tmp += Q[(i*N)+k] * Q[(i*N)+j];
-			//}
-			//recebe tmp_local, soma e encaminha para todos os processos
-			//MPI_Allreduce(&tmp_local, &tmp, 1, MPI_FLOAT, MPI_SUM, MPI_COMM_WORLD);
+			for(i=ini; i < fim; i++){
+				tmp += Q[(i*N)+k] * Q[(i*N)+j];
+			}
+			//It receives tmp_local, sums, and sends to all other processes
 			MPI_Irecv(&tmp_aux, 1, MPI_FLOAT, 0, 99, interCommPai, &request);
 			MPI_Send(&tmp,1, MPI_FLOAT, 0, 99, interCommPai);
-			//MPI_Recv(&tmp, 1, MPI_FLOAT, 0, 99, interCommPai, MPI_STATUS_IGNORE);
 			MPI_Wait(&request, MPI_STATUS_IGNORE);
-			//tmp = tmp_aux;
+			tmp = tmp_aux;
 			
-			//for(i=0; i < N; i++){
-			//	Q[(i*N)+j] -= tmp * Q[(i*N)+k];
-			//}
+			for(i=0; i < N; i++){
+				Q[(i*N)+j] -= tmp * Q[(i*N)+k];
+			}
 		}
 	}
 }
