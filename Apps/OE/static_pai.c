@@ -141,7 +141,7 @@ void leEntrada(){
 
 int main(int argc, char **argv){
 		int numFilhos = atoi(argv[1]);
-		char bin[] = "oe_filho";
+		char bin[] = "static_filho";
 		size = numFilhos+1;
 
 		MPI_Init(&argc, &argv);
