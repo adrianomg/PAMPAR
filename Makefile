@@ -5,7 +5,7 @@ CC=gcc
 CPP=g++
 MPICC=mpicc
 MPICPP=mpic++
-CFLAGS=-lm
+CFLAGS=-O2 -lm
 MACRO=-DELAPSEDTIME
 EXEC_EXT=
 

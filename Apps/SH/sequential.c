@@ -69,7 +69,7 @@ int main(int argc, char **argv){
 		#ifdef ELAPSEDTIME
 			gettimeofday(&end, NULL);
 			double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + end.tv_usec - start.tv_usec) / 1.e6;
-			printf("Excution time\t%f\n", delta);
+			printf("Execution time\t%f\n", delta);
 		#endif
         return 0;
 }
