@@ -3,13 +3,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
-
-long int N = 0, *vetIndices = NULL, *vetor = NULL, size = 0, indice = 0;
-MPI_Comm interComm;
+int N = 0, *vetIndices = NULL, *vetor = NULL, size = 0, indice = 0;
+MPI_Comm interComm = 0;
 MPI_Request request[128];
 
 void sortPar(int rank){
-	long int aux, i;
+	int aux, i;
 	for(i=vetIndices[(rank*size)+rank]; i<vetIndices[size+rank]; i = i+2){
 		if(vetor[i] > vetor[i+1]){
 			aux = vetor[i];
@@ -20,7 +19,7 @@ void sortPar(int rank){
 }
 
 void sortImpar(int rank){
-	long int aux, i;
+	int aux, i;
 	for(i=vetIndices[(size*2)+rank]; i<vetIndices[(size*3)+rank]; i = i+2){
 		if(vetor[i] > vetor[i+1]){
 			aux = vetor[i];
@@ -32,7 +31,7 @@ void sortImpar(int rank){
 
 void defineChunk(int size){
 	int i;
-	long int aux = N/size;
+	int aux = N/size;
 	
 	for(i=0; i<size; i++){
 		if(i==0)
@@ -58,7 +57,7 @@ void defineChunk(int size){
 }
 
 void bubbleSort(){
-	int i, source=0;
+	int i, source;
 	int aux = N/size;
 	int id = 99;
 			
@@ -73,8 +72,12 @@ void bubbleSort(){
 		MPI_Recv(&vetor[aux-1], (N-(aux-1))+1, MPI_INT, 0, id, interComm, MPI_STATUS_IGNORE);
 	}else{
 		for(i=0; i<size-2; i++){
+			//int tag = id+(i*100);
 			MPI_Irecv(&vetor[((i+1)*aux)-1], aux, MPI_INT, i, id+(i*100), interComm, &request[i]);
+
 		}
+
+		
 		MPI_Irecv(&vetor[((size-2)*aux)-1], aux+1, MPI_INT, size-2, id+((size-2)*100), interComm, &request[size-2]);
 		for(i=0;i<size-1;i++){
 			MPI_Waitany(size-1, request, &source, MPI_STATUS_IGNORE);
@@ -90,12 +93,12 @@ void leEntrada(){
 }
 
 int main(int argc, char **argv){
-
+	
 	if (argc < 4) {
-		printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <n-child-proc> <input-size> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program 3 200000 \"$PWD/child\"\n\n");
-		exit(1);
-	}
-
+                printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <n-child-proc> <input-size> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program 3 200000 ""$PWD/child""\n\n");
+                exit(1);
+        }
+	
 	#ifdef ELAPSEDTIME
 		struct timeval start, end;
 		gettimeofday(&start, NULL);
@@ -110,42 +113,41 @@ int main(int argc, char **argv){
 	long long valor;
 				
 	N = atoi(argv[2]);
-	char *bin;
-    	int tam1 = strlen(argv[argc-1]);
-   	bin = (char*)malloc((tam1)*sizeof(char));
-   	strcpy(bin, argv[argc-1]);
 
-	vetor = malloc(sizeof(long int)*N);
-	vetIndices = malloc(sizeof(long int)*(size)*4);
+	char *bin;
+        int tam1 = strlen(argv[argc-1]);
+        bin = (char*)malloc((tam1)*sizeof(char));
+        strcpy(bin, argv[argc-1]);
+	
+	vetor = malloc(sizeof(int)*N);
+	vetIndices = malloc(sizeof(int)*(size)*4);
 	defineChunk(numFilhos+1);
 				
 	leEntrada();
 	int i, err[1];
 		
 	for(i=argc;i<7;i++){
-		argv[i] = malloc(sizeof(char)*50);
+		argv[i] = malloc(sizeof(char)*20);
 	}
-
+	
 	sprintf(argv[4], "%d", numFilhos);
-	sprintf(argv[5], "%ld", indice);
+	sprintf(argv[5], "%d", indice);
 	argv[6] = NULL;
 
 	MPI_Comm_spawn(bin, argv, numFilhos, localInfo, 0, MPI_COMM_SELF, &interComm, err);
-	
 	for(i=0;i<numFilhos;i++){
 		MPI_Send(&vetIndices[0], size*4, MPI_INT, i, 99, interComm);
-	
 	}
-
+		
 	bubbleSort();
-
+		
 	MPI_Finalize();
 		
 	#ifdef ELAPSEDTIME
 		gettimeofday(&end, NULL);
 		double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + end.tv_usec - start.tv_usec) / 1.e6;
-		printf("Execution time\t%f\n", delta);
+		printf("Excution time\t%f\n", delta);
 	#endif
-	
+
 	return 0;
 }
