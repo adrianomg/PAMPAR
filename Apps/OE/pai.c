@@ -72,7 +72,7 @@ void bubbleSort(){
 	if(size==2){
 		MPI_Recv(&vetor[aux-1], (N-(aux-1))+1, MPI_INT, 0, id, interComm, MPI_STATUS_IGNORE);
 	}else{
-		for(i=0; i<size-1; i++){
+		for(i=0; i<size-2; i++){
 			MPI_Irecv(&vetor[((i+1)*aux)-1], aux, MPI_INT, i, id+(i*100), interComm, &request[i]);
 		}
 		for(i=0;i<size-1;i++){
@@ -110,9 +110,9 @@ int main(int argc, char **argv){
 				
 	N = atoi(argv[2]);
 	char *bin;
-    int tam1 = strlen(argv[argc-1]);
-    bin = (char*)malloc((tam1)*sizeof(char));
-    strcpy(bin, argv[argc-1]);
+    	int tam1 = strlen(argv[argc-1]);
+   	bin = (char*)malloc((tam1)*sizeof(char));
+   	strcpy(bin, argv[argc-1]);
 
 	vetor = malloc(sizeof(long int)*N);
 	vetIndices = malloc(sizeof(long int)*(size)*4);
