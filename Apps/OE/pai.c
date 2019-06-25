@@ -93,12 +93,7 @@ void leEntrada(){
 }
 
 int main(int argc, char **argv){
-	
-	if (argc < 4) {
-                printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <n-child-proc> <input-size> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program 3 200000 ""$PWD/child""\n\n");
-                exit(1);
-        }
-	
+
 	#ifdef ELAPSEDTIME
 		struct timeval start, end;
 		gettimeofday(&start, NULL);
@@ -113,6 +108,13 @@ int main(int argc, char **argv){
 	long long valor;
 				
 	N = atoi(argv[2]);
+	/*char cam_filho[] = "/filho";
+	char *bin;
+	int tam1 = strlen(argv[argc-1]);
+	int tam2 = strlen(cam_filho);
+	bin = (char*)malloc((tam1+tam2)*sizeof(char));
+	strcpy(bin, strcat (argv[argc-1], cam_filho));
+	*/
 
 	char *bin;
         int tam1 = strlen(argv[argc-1]);
