@@ -64,7 +64,7 @@ void ajustaChunk(int size){
 int main(int argc, char **argv){
 
 		if (argc < 6) {
-			printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <input-image> <n-child-proc> <image-height> <image-width> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program image.txt 3 1920 1080 \"$PWD/child\"\n\n");
+			printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <n-child-proc> <input-image> <image-height> <image-width> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program image.txt 3 1920 1080 \"$PWD/child\"\n\n");
 			exit(1);
 		}
 
@@ -79,7 +79,7 @@ int main(int argc, char **argv){
         MPI_Info localInfo;
         MPI_Info_create(&localInfo);
 
-        size = atoi(argv[2])+1;
+        size = atoi(argv[1])+1;
         MPI_Comm intercommFilho[size];
 
 		
@@ -96,7 +96,7 @@ int main(int argc, char **argv){
 		float hist[256], db;
 		matriz = malloc(sizeof(float)*hmax*wmax);
 		matrizOut = malloc(sizeof(float)*hmax*wmax);
-		input = fopen(argv[1], "r");
+		input = fopen(argv[2], "r");
 		for(h=0;h<hmax;h++){
 				for(w=0;w<wmax;w++){
 						fscanf(input, "%f", &matriz[(h*wmax)+w]);
@@ -139,7 +139,7 @@ int main(int argc, char **argv){
 		#ifdef ELAPSEDTIME
 			gettimeofday(&end, NULL);
 			double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + end.tv_usec - start.tv_usec) / 1.e6;
-			printf("Excution time\t%f\n", delta);
+			printf("Execution time\t%f\n", delta);
 		#endif
 		
 		return 0;

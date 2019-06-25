@@ -46,7 +46,7 @@ void calculaCelulas(unsigned short int *matriz, int nTotal){
 int main(int argc, char **argv){
 
 	if (argc < 4) {
-		printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <input-file> <n-child-proc> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program 2048.txt 3 \"$PWD/child\"\n\n");
+		printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <n-child-proc> <input-file> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program 2048.txt 3 \"$PWD/child\"\n\n");
 		exit(1);
 	}
 
@@ -75,7 +75,7 @@ int main(int argc, char **argv){
 	  
 	int *inicio=NULL;
 	  
-	matrizEntrada = fopen(argv[1],"r");
+	matrizEntrada = fopen(argv[2],"r");
  
 	if(matrizEntrada == NULL){
 		printf("Não foi possível carregar o arquivo!\n");
@@ -87,7 +87,7 @@ int main(int argc, char **argv){
 
 	linhasTotais = linhasComputaveis+2;
 
-	nFilhos = atoi(argv[2]);
+	nFilhos = atoi(argv[1]);
 	int err[1];
 	//geracoes = 100;
 
@@ -140,7 +140,7 @@ int main(int argc, char **argv){
 	#ifdef ELAPSEDTIME
 		gettimeofday(&end, NULL);
 		double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + end.tv_usec - start.tv_usec) / 1.e6;
-		printf("%f\n", delta);
+		printf("Execution time\t%f\n", delta);
     #endif
     
 	free(vetChunk);

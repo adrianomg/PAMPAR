@@ -73,7 +73,7 @@ void ajustaChunk(int size){
 int main(int argc, char **argv){
 
 	if (argc < 5) {
-		printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <input-size> <input-file> <n-child-proc> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program 2048 2048.txt 3 \"$PWD/child\"\n\n");
+		printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <n-child-proc> <input-size> <input-file> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program 2048 2048.txt 3 \"$PWD/child\"\n\n");
 		exit(1);
 	}
 
@@ -98,7 +98,7 @@ int main(int argc, char **argv){
 	FILE *input;
 	vertices = atoi(argv[1]);
 	input = fopen(argv[2], "r");
-	int num_Proc = atoi(argv[3]);
+	int num_Proc = atoi(argv[0]);
 	MPI_Comm intercommFilho[num_Proc];
 		
 	G = malloc(sizeof(int)*(vertices*vertices));
@@ -131,7 +131,7 @@ int main(int argc, char **argv){
 	#ifdef ELAPSEDTIME
 		gettimeofday(&end, NULL);
 		double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + end.tv_usec - start.tv_usec) / 1.e6;
-		printf("Excution time\t%f\n", delta);
+		printf("Execution time\t%f\n", delta);
 	#endif
 			
 	return 0;
