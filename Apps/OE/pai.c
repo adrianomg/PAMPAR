@@ -75,6 +75,7 @@ void bubbleSort(){
 		for(i=0; i<size-2; i++){
 			MPI_Irecv(&vetor[((i+1)*aux)-1], aux, MPI_INT, i, id+(i*100), interComm, &request[i]);
 		}
+		MPI_Irecv(&vetor[((size-2)*aux)-1], aux+1, MPI_INT, size-2, id+((size-2)*100), interComm, &request[size-2]);
 		for(i=0;i<size-1;i++){
 			MPI_Waitany(size-1, request, &source, MPI_STATUS_IGNORE);
 		}
