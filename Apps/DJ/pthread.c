@@ -81,7 +81,7 @@ void ajustaChunk(){
 int main(int argc, char **argv){
 	
 	if (argc < 4) {
-		printf ("ERROR! Usage: my_program <input-size> <input-file> <threads>\n\n \tE.g. -> ./my_program 2048 2048.txt 2\n\n");
+		printf ("ERROR! Usage: my_program <threads> <input-size> <input-file> \n\n \tE.g. -> ./my_program 2048 2048.txt 2\n\n");
 		exit(1);
 	}
 
@@ -92,10 +92,10 @@ int main(int argc, char **argv){
 	long int i;
 	FILE *input;
 
-	vertices = atoi(argv[1]);
-	input = fopen(argv[2], "r");
-	num_threads = atol(argv[3]);
-
+	num_threads = atol(argv[1]);
+	vertices = atoi(argv[2]);
+	input = fopen(argv[3], "r");
+	
 	pthread_t threads[num_threads];
 
 	G = malloc(sizeof(int)*vertices*vertices);

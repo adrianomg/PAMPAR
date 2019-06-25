@@ -103,7 +103,7 @@ void imprime(){
 int main(int argc, char **argv){
 
 	if (argc < 3) {
-		printf ("ERROR! Usage: my_program <input-file> <threads>\n\n \tE.g. -> ./my_program 2048.txt 2\n\n");
+		printf ("ERROR! Usage: my_program <threads> <input-file> \n\n \tE.g. -> ./my_program 2048.txt 2\n\n");
 		exit(1);
 	}
 
@@ -114,8 +114,8 @@ int main(int argc, char **argv){
     FILE *input;
     long int i;
 
-    numThreads = atol(argv[2]);
-    input = fopen(argv[1], "r");
+    numThreads = atol(argv[1]);
+    input = fopen(argv[2], "r");
     fscanf(input, "%d", &N);
     NTotal = N+2;
     socIn = (unsigned short int*) malloc(sizeof(unsigned short int)*NTotal*NTotal);
