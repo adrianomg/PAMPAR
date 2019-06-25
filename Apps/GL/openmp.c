@@ -101,7 +101,7 @@ void joga(unsigned short int *socIn, unsigned short int *socOut, int Ntotal, int
 int main(int argc, char **argv){
 
 	if (argc < 3) {
-		printf ("ERROR! Usage: my_program <input-file> <threads>\n\n \tE.g. -> ./my_program 2048.txt 2\n\n");
+		printf ("ERROR! Usage: my_program <threads> <input-file> \n\n \tE.g. -> ./my_program 2048.txt 2\n\n");
 		exit(1);
 	}
 
@@ -112,8 +112,8 @@ int main(int argc, char **argv){
     unsigned short int *socIn, *socOut;
     FILE *input;
     int numGeracoes = 100, N, Ntotal;
-    input = fopen(argv[1], "r");
-    omp_set_num_threads(atoi(argv[2]));
+    input = fopen(argv[2], "r");
+    omp_set_num_threads(atoi(argv[1]));
 	fscanf(input, "%d", &N);
     Ntotal = N+2;
     socIn = (unsigned short int*) malloc(sizeof(unsigned short int)*Ntotal*Ntotal);
@@ -129,7 +129,7 @@ int main(int argc, char **argv){
     #ifdef ELAPSEDTIME
 		gettimeofday(&end, NULL);
 		double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + end.tv_usec - start.tv_usec) / 1.e6;
-		printf("%f\n", delta);
+		printf("Execution time\t%f\n", delta);
     #endif
     
 	//imprime(socIn, N);	

@@ -54,7 +54,7 @@ void preencheGrafo(FILE *input){
 int main(int argc, char **argv){
 
 	if (argc < 4) {
-		printf ("ERROR! Usage: my_program <input-size> <input-file> <threads>\n\n \tE.g. -> ./my_program 2048 2048.txt 2\n\n");
+		printf ("ERROR! Usage: my_program <threads> <input-size> <input-file> \n\n \tE.g. -> ./my_program 2048 2048.txt 2\n\n");
 		exit(1);
 	}
 
@@ -65,9 +65,9 @@ int main(int argc, char **argv){
 	int arestas, source;
 	FILE *input;
 	
-	vertices = atoi(argv[1]);
-	input = fopen(argv[2], "r");
-	omp_set_num_threads(atoi(argv[3]));
+	vertices = atoi(argv[2]);
+	input = fopen(argv[3], "r");
+	omp_set_num_threads(atoi(argv[1]));
 
 	G = malloc(sizeof(int)*vertices*vertices);
 
@@ -78,7 +78,7 @@ int main(int argc, char **argv){
 	#ifdef ELAPSEDTIME
 		gettimeofday(&end, NULL);
 		double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + end.tv_usec - start.tv_usec) / 1.e6;
-		printf("Excution time\t%f\n", delta);
+		printf("Execution time\t%f\n", delta);
 	#endif
 
 	return 0;

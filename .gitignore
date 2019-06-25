@@ -5,3 +5,4 @@ Apps/*/openmp
 Apps/*/filho
 Apps/*/pai
 run.sh
+*.csv
