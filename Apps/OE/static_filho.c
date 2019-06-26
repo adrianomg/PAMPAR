@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N 150000
+#define N 225000
 
 MPI_Comm interCommPai;
 MPI_Request request[3];

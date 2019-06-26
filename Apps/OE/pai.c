@@ -107,7 +107,7 @@ int main(int argc, char **argv){
 
 		N = atoi(argv[2]);
 		
-		int numFilhos = atoi(argv[4]);
+		int numFilhos = atoi(argv[1]);
 		size = numFilhos+1;
 		vetIndice = malloc(sizeof(int)*size*4);
 		vetor = malloc(sizeof(int)*N);

@@ -3,7 +3,7 @@
 #Setup file
 
 #set of parallel tasks to run
-declare -a threads=("2" "4" "8" "16")
+declare -a threads=("2" "4" "8")
 
 #Number of executions
 EXECNUMBER=10

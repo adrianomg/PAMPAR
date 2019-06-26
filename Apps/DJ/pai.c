@@ -96,9 +96,9 @@ int main(int argc, char **argv){
 
 	int i;
 	FILE *input;
-	vertices = atoi(argv[1]);
-	input = fopen(argv[2], "r");
-	int num_Proc = atoi(argv[0]);
+	vertices = atoi(argv[2]);
+	input = fopen(argv[3], "r");
+	int num_Proc = atoi(argv[1]);
 	MPI_Comm intercommFilho[num_Proc];
 		
 	G = malloc(sizeof(int)*(vertices*vertices));

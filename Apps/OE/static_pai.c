@@ -1,8 +1,9 @@
 #include <mpi.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
 
-#define N 150000
+#define N 225000
 
 int *vetIndices, *vetor, size, indice;
 MPI_Comm interComm;
@@ -140,8 +141,12 @@ void leEntrada(){
 
 
 int main(int argc, char **argv){
+		#ifdef ELAPSEDTIME
+		struct timeval start, end;
+		gettimeofday(&start, NULL);
+	#endif
 		int numFilhos = atoi(argv[1]);
-		char bin[] = "static_filho";
+		char bin[] = "Apps/OE/filho";
 		size = numFilhos+1;
 
 		MPI_Init(&argc, &argv);
@@ -181,5 +186,9 @@ int main(int argc, char **argv){
 
 
 		MPI_Finalize();
-
+	#ifdef ELAPSEDTIME
+		gettimeofday(&end, NULL);
+		double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + end.tv_usec - start.tv_usec) / 1.e6;
+		printf("Execution time\t%f\n", delta);
+	#endif
 }
