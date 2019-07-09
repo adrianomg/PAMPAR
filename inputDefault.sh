@@ -6,10 +6,10 @@
 declare -a threads=("2" "4" "8")
 
 #Number of executions
-EXECNUMBER=10
+EXECNUMBER=3
 
 #small, medium, large, debug
-SIZE=medium
+SIZE=small
 
 
 

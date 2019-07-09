@@ -4,5 +4,4 @@ Apps/*/mpi1
 Apps/*/openmp
 Apps/*/filho
 Apps/*/pai
-run.sh
 *.csv
