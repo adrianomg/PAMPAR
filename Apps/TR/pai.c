@@ -142,45 +142,42 @@ int main(int argc, char **argv){
 		struct timeval start, end;
 		gettimeofday(&start, NULL);
 	#endif
-    MPI_Init(&argc, &argv);
-    MPI_Info localInfo;
-    MPI_Info_create(&localInfo);
-    MPI_Request req;
-    MPI_Request reqs[128];
+	MPI_Init(&argc, &argv);
+	MPI_Info localInfo;
+	MPI_Info_create(&localInfo);
+	MPI_Request req;
+	MPI_Request reqs[128];
 
-    //Inicialização para jogo
-    int x = 0, i, linha, coluna, indice, N;
+	//Inicialização para jogo
+	int x = 0, i, linha, coluna, indice, N;
 
-    N = atoi(argv[2]);
+	N = atoi(argv[2]);
 
-	char *bin;
-    int tam1 = strlen(argv[argc-1]);
-    bin = (char*)malloc((tam1)*sizeof(char));
-    strcpy(bin, argv[argc-1]);
+	char *bin = realpath(argv[argc-1], NULL); //find the child full path
 
-    int presas = 100;
-    int predadores = 100;
-    int numProc = atoi(argv[1]);
-    int tam = ((N*2) - 1);
-    int size = numProc+1;
-    int err[1] = {0};
+	int presas = 100;
+	int predadores = 100;
+	int numProc = atoi(argv[1]);
+	int tam = ((N*2) - 1);
+	int size = numProc+1;
+	int err[1] = {0};
 
-    //Inicializacao para paralelização
+	//Inicializacao para paralelização
 	int *vetChunk = NULL, *vetIni = NULL, *vetFim = NULL;
-    TipoRing *jogo, *auxiliar;
-    vetChunk = malloc(sizeof(int)*size);
-    vetFim = malloc(sizeof(int)*size);
-    vetIni = malloc(sizeof(int)*size);
+	TipoRing *jogo, *auxiliar;
+	vetChunk = malloc(sizeof(int)*size);
+	vetFim = malloc(sizeof(int)*size);
+	vetIni = malloc(sizeof(int)*size);
 
-    ajustaChunk(vetChunk, vetFim, vetIni, size, N);
+	ajustaChunk(vetChunk, vetFim, vetIni, size, N);
 
-    //Alocação das estruturas e inicialização
-    jogo = malloc(sizeof(TipoRing)*N*N);
-    auxiliar = malloc(sizeof(TipoRing)*N*N);        
-    inicializaMatriz(jogo, N, predadores, presas, auxiliar);
-    zeraAux(auxiliar, N);
+	//Alocação das estruturas e inicialização
+	jogo = malloc(sizeof(TipoRing)*N*N);
+	auxiliar = malloc(sizeof(TipoRing)*N*N);        
+	inicializaMatriz(jogo, N, predadores, presas, auxiliar);
+	zeraAux(auxiliar, N);
 
-    MPI_Comm_spawn(bin, argv, numProc, localInfo, 0, MPI_COMM_SELF, &intercommFilho, err);
+	MPI_Comm_spawn(bin, argv, numProc, localInfo, 0, MPI_COMM_SELF, &intercommFilho, err);
 
 
 
@@ -189,43 +186,43 @@ int main(int argc, char **argv){
 	}
         
 	//Enviar dados para todos os processos, cada parte para cada um!
-    for(x=0; x<tam; x++){
-        for(linha=vetIni[0];linha<vetFim[0];linha++){
-            for(coluna=0;coluna<N;coluna++){
-                if(linha + coluna == x){
-                    joga(jogo, linha,coluna, N, auxiliar);
-                }
-            }
-        }
-        MPI_Irecv(&jogo[(vetIni[1]*N)], N, MPI_INT, 0, 9, intercommFilho, &req);
-        for(linha=vetIni[0];linha<vetFim[0];linha++){
-            for(coluna=0;coluna<N;coluna++){
-                if(linha + coluna == x){
-                    jogo[(linha*N)+coluna].X = auxiliar[(linha*N)+coluna].X;
-                    jogo[(linha*N)+coluna].Y = auxiliar[(linha*N)+coluna].Y;
-                }
-            }
-        }
+	for(x=0; x<tam; x++){
+		for(linha=vetIni[0];linha<vetFim[0];linha++){
+			for(coluna=0;coluna<N;coluna++){
+				if(linha + coluna == x){
+					joga(jogo, linha,coluna, N, auxiliar);
+				}
+			}
+		}
+		MPI_Irecv(&jogo[(vetIni[1]*N)], N, MPI_INT, 0, 9, intercommFilho, &req);
+		for(linha=vetIni[0];linha<vetFim[0];linha++){
+			for(coluna=0;coluna<N;coluna++){
+				if(linha + coluna == x){
+					jogo[(linha*N)+coluna].X = auxiliar[(linha*N)+coluna].X;
+					jogo[(linha*N)+coluna].Y = auxiliar[(linha*N)+coluna].Y;
+				}
+			}
+		}
 
-        MPI_Send(&jogo[(vetFim[0]-1)*N], N, MPI_INT, 0, 49, intercommFilho);
-        MPI_Wait(&req, MPI_STATUS_IGNORE);
-    }
-
-    for(i=0;i<numProc;i++){
-        MPI_Irecv(&jogo[(vetIni[1]*N)], vetChunk[1]*N, MPI_INT, i, 9, intercommFilho, &reqs[i]);
-    }
-    int source=0;
-    for(i=0;i<numProc;i++){
-        MPI_Waitany(numProc, reqs, &source, MPI_STATUS_IGNORE);
+		MPI_Send(&jogo[(vetFim[0]-1)*N], N, MPI_INT, 0, 49, intercommFilho);
+		MPI_Wait(&req, MPI_STATUS_IGNORE);
 	}
-    MPI_Finalize();
-    #ifdef ELAPSEDTIME
+
+	for(i=0;i<numProc;i++)
+		MPI_Irecv(&jogo[(vetIni[1]*N)], vetChunk[1]*N, MPI_INT, i, 9, intercommFilho, &reqs[i]);
+	
+	int source=0;
+	for(i=0;i<numProc;i++)
+		MPI_Waitany(numProc, reqs, &source, MPI_STATUS_IGNORE);
+	
+	MPI_Finalize();
+	#ifdef ELAPSEDTIME
 		gettimeofday(&end, NULL);
 		double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + end.tv_usec - start.tv_usec) / 1.e6;
 		printf("Execution time\t%f\n", delta);
 	#endif
 
-    return 0;
+	return 0;
 }
 
 
