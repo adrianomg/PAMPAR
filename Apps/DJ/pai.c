@@ -89,10 +89,7 @@ int main(int argc, char **argv){
 	MPI_Info localInfo;
 	MPI_Info_create(&localInfo);
 		
-	char *bin;
-	int tam1 = strlen(argv[argc-1]);
-	bin = (char*)malloc((tam1)*sizeof(char));
-	strcpy(bin, argv[argc-1]);
+	char *bin = realpath(argv[argc-1], NULL); //find the child full path
 
 	int i;
 	FILE *input;
