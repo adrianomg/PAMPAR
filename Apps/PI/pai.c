@@ -38,12 +38,9 @@ int main(int argc, char **argv){
 	MPI_Request reqs[128];
 	MPI_Status st[128];
 
-
 	NUM_PONTOS = strtoul(argv[2], NULL, 10);
-	char *bin;
-	int tam1 = strlen(argv[argc-1]);
-	bin = (char*)malloc((tam1)*sizeof(char));
-	strcpy(bin, argv[argc-1]);
+	
+	char *bin = realpath(argv[argc-1], NULL); //find the child full path
 
 	int nFilhos = atoi(argv[1]);
 
