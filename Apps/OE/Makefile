@@ -15,10 +15,10 @@ pthread$(EXEC_EXT): pthread.c
 mpi1$(EXEC_EXT): mpi1.c
 	$(MPICC) -o $@ $< $(MACRO) $(CFLAGS)
 
-pai$(EXEC_EXT): static_pai.c
-	$(MPICC) -o $@ $< $(MACRO) $(CFLAGS)
+pai$(EXEC_EXT): pai.c
+	$(MPICC) -o $@ $< $(MACRO) -fno-stack-protector $(CFLAGS)
 
-filho$(EXEC_EXT): static_filho.c
+filho$(EXEC_EXT): filho.c
 	$(MPICC) -o $@ $< $(MACRO) $(CFLAGS)
 
 #.PHONY: msg
