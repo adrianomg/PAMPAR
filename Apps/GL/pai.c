@@ -64,10 +64,7 @@ int main(int argc, char **argv){
 
 	FILE *matrizEntrada = NULL;
 	
-	char *bin;
-    int tam1 = strlen(argv[argc-1]);
-    bin = (char*)malloc((tam1)*sizeof(char));
-    strcpy(bin, argv[argc-1]);
+	char *bin = realpath(argv[argc-1], NULL); //find the child full path
 	  
 	int nFilhos=0, linhasComputaveis=0, linhasTotais=0, sobra=0, i=0;
 	 
