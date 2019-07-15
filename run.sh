@@ -73,7 +73,7 @@ for step in `seq 1 $EXECNUMBER`; do
 			printf "    Application: $app\n"
 			printf "    IPP: MPI-2\n"
 			printf "    Threads: $th\n"
-			time=`mpirun -np 1 ./Apps/$app/pai $(($th-1)) $input Apps/$app/filho |grep -i time | awk {'print $3'}`
+			time=`mpirun -np 1 ./Apps/$app/pai $(($th-1)) $input filho |grep -i time | awk {'print $3'}`
 			printf "    Time: $time\n\n"
 		done		
 	done
