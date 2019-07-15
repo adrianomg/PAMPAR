@@ -139,10 +139,8 @@ int main(int argc, char **argv){
 	int numProc = atoi(argv[1]);
 	
 	N = atoi(argv[2]);
-	char *bin;
-    int tam1 = strlen(argv[argc-1]);
-    bin = (char*)malloc((tam1)*sizeof(char));
-    strcpy(bin, argv[argc-1]);
+	
+	char *bin = realpath(argv[argc-1], NULL); //find the child full path
 
 	vetIni = malloc(sizeof(int)*numProc+1);
 	vetFim = malloc(sizeof(int)*numProc+1);
