@@ -63,84 +63,80 @@ void ajustaChunk(int size){
 
 int main(int argc, char **argv){
 
-		if (argc < 6) {
-			printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <n-child-proc> <input-image> <image-height> <image-width> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program image.txt 3 1920 1080 \"$PWD/child\"\n\n");
-			exit(1);
-		}
+	if (argc < 6) {
+		printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <n-child-proc> <input-image> <image-height> <image-width> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program image.txt 3 1920 1080 \"$PWD/child\"\n\n");
+		exit(1);
+	}
 
         #ifdef ELAPSEDTIME
-			struct timeval start, end;
-			gettimeofday(&start, NULL);
-		#endif
-		int size, rank, h, w, i;
-		MPI_Init(&argc, &argv);
-		MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-		int err[1];
+		struct timeval start, end;
+		gettimeofday(&start, NULL);
+	#endif
+	int size, rank, h, w, i;
+	MPI_Init(&argc, &argv);
+	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+	int err[1];
         MPI_Info localInfo;
         MPI_Info_create(&localInfo);
 
         size = atoi(argv[1])+1;
         MPI_Comm intercommFilho[size];
-
 		
-		hmax = atoi(argv[3]);
-		wmax = atoi(argv[4]);
-		char *bin;
-		int tam1 = strlen(argv[argc-1]);
-		bin = (char*)malloc((tam1)*sizeof(char));
-		strcpy(bin, argv[argc-1]);
-
+	hmax = atoi(argv[3]);
+	wmax = atoi(argv[4]);
 		
-		FILE *input;
-		float *matrizOut;
-		float hist[256], db;
-		matriz = malloc(sizeof(float)*hmax*wmax);
-		matrizOut = malloc(sizeof(float)*hmax*wmax);
-		input = fopen(argv[2], "r");
-		for(h=0;h<hmax;h++){
-				for(w=0;w<wmax;w++){
-						fscanf(input, "%f", &matriz[(h*wmax)+w]);
-				}
-		}				
-
-		for(i=argc-1;i<10;i++){
-				argv[i] = (char*) malloc(sizeof(char)*10);
-		}
-
-		vetIni = malloc(sizeof(int)*size);
-		vetFim = malloc(sizeof(int)*size);
-		linhas_validas = hmax-(lx+ly);
-		ajustaChunk(size);
-
-		for(i=0;i<size-1;i++){
-				sprintf(argv[5], "%d", vetIni[i+1]);
-				sprintf(argv[6], "%d", vetFim[i+1]);
-				MPI_Comm_spawn(bin, argv, 1, localInfo, 0, MPI_COMM_SELF, &intercommFilho[i], err);
-				MPI_Send(&matriz[0], hmax*wmax, MPI_FLOAT, 0, 99, intercommFilho[i]);
-		}
-		histograma(310, 714, lx, ly, alvo);
-		for(i=0;i<size-1;i++)
-				MPI_Send(&alvo[0], 256, MPI_FLOAT, 0, 99, intercommFilho[i]);
-
-		for(h=vetIni[0]; h<vetFim[0]; h++){
-				for(w=0;w<wmax-ly; w++){
-						histograma(h, w, lx, ly, hist);
-						distbhat(alvo, hist, &db);
-						matrizOut[(h*wmax)+w] = round(255*db);
-				}
-		}
-
-		for(i=0;i<size-1;i++){
-				MPI_Recv(&matrizOut[vetIni[i+1]*wmax], ((vetFim[i+1]-vetIni[i+1])*wmax), MPI_FLOAT, 0, 99, intercommFilho[i], MPI_STATUS_IGNORE);
-		}
-
-		MPI_Finalize();
+	char *bin = realpath(argv[argc-1], NULL); //find the child full path
 		
-		#ifdef ELAPSEDTIME
-			gettimeofday(&end, NULL);
-			double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + end.tv_usec - start.tv_usec) / 1.e6;
-			printf("Execution time\t%f\n", delta);
-		#endif
+	FILE *input;
+	float *matrizOut;
+	float hist[256], db;
+	matriz = malloc(sizeof(float)*hmax*wmax);
+	matrizOut = malloc(sizeof(float)*hmax*wmax);
+	input = fopen(argv[2], "r");
+	
+	for(h=0;h<hmax;h++){
+		for(w=0;w<wmax;w++){
+			fscanf(input, "%f", &matriz[(h*wmax)+w]);
+		}
+	}				
+
+	for(i=argc-1;i<10;i++)
+		argv[i] = (char*) malloc(sizeof(char)*10);
+
+	vetIni = malloc(sizeof(int)*size);
+	vetFim = malloc(sizeof(int)*size);
+	linhas_validas = hmax-(lx+ly);
+	ajustaChunk(size);
+
+	for(i=0;i<size-1;i++){
+		sprintf(argv[5], "%d", vetIni[i+1]);
+		sprintf(argv[6], "%d", vetFim[i+1]);
+		MPI_Comm_spawn(bin, argv, 1, localInfo, 0, MPI_COMM_SELF, &intercommFilho[i], err);
+		MPI_Send(&matriz[0], hmax*wmax, MPI_FLOAT, 0, 99, intercommFilho[i]);
+	}
+	histograma(310, 714, lx, ly, alvo);
+	for(i=0;i<size-1;i++)
+		MPI_Send(&alvo[0], 256, MPI_FLOAT, 0, 99, intercommFilho[i]);
+
+	for(h=vetIni[0]; h<vetFim[0]; h++){
+		for(w=0;w<wmax-ly; w++){
+			histograma(h, w, lx, ly, hist);
+			distbhat(alvo, hist, &db);
+			matrizOut[(h*wmax)+w] = round(255*db);
+		}
+	}
+
+	for(i=0;i<size-1;i++){
+		MPI_Recv(&matrizOut[vetIni[i+1]*wmax], ((vetFim[i+1]-vetIni[i+1])*wmax), MPI_FLOAT, 0, 99, intercommFilho[i], MPI_STATUS_IGNORE);
+	}
+
+	MPI_Finalize();
 		
-		return 0;
+	#ifdef ELAPSEDTIME
+		gettimeofday(&end, NULL);
+		double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + end.tv_usec - start.tv_usec) / 1.e6;
+		printf("Execution time\t%f\n", delta);
+	#endif
+		
+	return 0;
 }
