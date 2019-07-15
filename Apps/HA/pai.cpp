@@ -107,11 +107,7 @@ int main(int argc, char **argv){
     d = (long unsigned int) atoi(argv[2]);
     n = (long unsigned int) atoi(argv[3]);
     
-    char *bin;
-    int tam1 = strlen(argv[argc-1]);
-    bin = (char*)malloc((tam1)*sizeof(char));
-    strcpy(bin, argv[argc-1]);
-
+    char *bin = realpath(argv[argc-1], NULL); //find the child full path
        
     argv[2] = (char*)malloc(sizeof(char)*10);
     argv[3] = (char*)malloc(sizeof(char)*10);
