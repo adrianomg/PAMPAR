@@ -96,10 +96,8 @@ int main(int argc, char **argv){
 	int *vetFim, *vetIni;
 	
 	N = atoi(argv[2]);
-	char *bin;
-    int tam1 = strlen(argv[argc-1]);
-    bin = (char*)malloc((tam1)*sizeof(char));
-    strcpy(bin, argv[argc-1]);
+	
+	char *bin = realpath(argv[argc-1], NULL); //find the child full path
 
 	A = malloc(sizeof(float)*N*N);
 	Anew = malloc(sizeof(float)*N*N);
