@@ -23,3 +23,15 @@ The pseudo-aplications are:
 The goal is to paralelize the set using more interfaces and add new pseudo-aplications according to the demand.
 
 More details and studies on these applications can be found at: https://www.researchgate.net/project/A-Parallel-Benchmark-for-Performance-Evaluation-and-Energy-Consumption-in-Multicore-and-Manycore-Architectures
+
+How to run:
+  
+  - To compile all the pseudo-applications, go to the PAMPAR root directory and run:
+  
+    ~$ make
+    
+  - You can run the 'run.sh' script and follow the steps to setup and run the benchmark.
+  
+    ~$ bash run.sh
+    
+  It will run the pseudo-applications according to the setup and give the execution time for each case.
