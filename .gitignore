@@ -1,7 +1,0 @@
-Apps/*/sequential
-Apps/*/pthread
-Apps/*/mpi1
-Apps/*/openmp
-Apps/*/filho
-Apps/*/pai
-*.csv
