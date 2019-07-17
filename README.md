@@ -50,7 +50,7 @@ How to run manually:
     	~$ ./pthread 4 2048
    
     
-- To run a MPI-1 application, run:
+  - To run a MPI-1 application, run:
   
   	~$ mpirun -np <number_of_processes> <executable> <input_problem>
     
@@ -66,7 +66,6 @@ How to run manually:
     	~$ mpirun -np 1 ./pai 3 2048 ./filho
     
   Examples of medium sized values of <input_problem> for each application:
-  
   	DFT: 32368
 	 DJ: 2048 2048_matrix.txt
 	 DP: 15000000000
