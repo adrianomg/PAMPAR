@@ -30,11 +30,11 @@ How to run:
   
   - To compile all the pseudo-applications, go to the PAMPAR root directory and run:
   
-    ~$ make
+	~$ make
     
   - You can run the 'run.sh' script and follow the steps to setup and run the benchmark.
   
-    ~$ bash run.sh
+  	~$ bash run.sh
     
   It will run the pseudo-applications according to the setup and give the execution time for each case.
   
@@ -44,23 +44,26 @@ How to run manually:
   
   - To run a PThread or OpenMP application, run:
     
-    ~$ ./<executable> <number_of_threads> <input_problem>
+    	~$ ./<executable> <number_of_threads> <input_problem>
     
-    Example: ~$ ./pthread 4 2048
+    Example: 
+    	~$ ./pthread 4 2048
    
     
-  - To run a MPI-1 application, run:
+- To run a MPI-1 application, run:
   
-    ~$ mpirun -np <number_of_processes> <executable> <input_problem>
+  	~$ mpirun -np <number_of_processes> <executable> <input_problem>
     
-    Example: ~$ mpirun -np 4 ./mpi1 2048
+    Example: 
+    	~$ mpirun -np 4 ./mpi1 2048
     
     
   - To run a MPI-2 application, run:
-  
-    ~$ mpirun -np 1 <executable> <number_of_child_processes> <input_problem> <child_executable>
+ 
+ 	~$ mpirun -np 1 <executable> <number_of_child_processes> <input_problem> <child_executable>
     
-    Example: ~$ mpirun -np 1 ./pai 3 2048 ./filho
+    Example: 
+    	~$ mpirun -np 1 ./pai 3 2048 ./filho
     
   Examples of medium sized values of <input_problem> for each application:
   
