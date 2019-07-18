@@ -47,7 +47,7 @@ More details and studies on these applications can be found at: https://www.rese
   
   - To run a PThread or OpenMP application, run:
     
-    	`~$ ./<executable> <number_of_threads> <input_problem>`
+    	~$ ./<executable> <number_of_threads> <input_problem>
     
     Example: 
     	`~$ ./pthread 4 2048`
@@ -69,15 +69,15 @@ More details and studies on these applications can be found at: https://www.rese
     	`~$ mpirun -np 1 ./pai 3 2048 ./filho`
   
     **Examples of medium sized values of <input_problem> for each application:**
-  
-   	`DFT: 32368
-	 `DJ: 2048 2048_matrix.txt$
-	 `DP: 15000000000
-	 `GS: 1024
-	 `HA: 100000 100000
-	 `JA: 2048
-	 `MM: 4096
-	 `NI: 1000000000
-	 `OE: 225000
-	 `PI: 4000000000
-	 `TR: 2048
+
+	- DFT: 32368
+	-  DJ: 2048 2048_matrix.txt$
+	-  DP: 15000000000
+	-  GS: 1024
+	-  HA: 100000 100000
+	-  JA: 2048
+	-  MM: 4096
+	-  NI: 1000000000
+	-  OE: 225000
+	-  PI: 4000000000
+	-  TR: 2048
