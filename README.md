@@ -1,4 +1,9 @@
 # PAMPAR
+
+**How to cite this work:**
+Marques Garcia, A, Schepke, C, Girardi, A. PAMPAR: A new parallel benchmark for performance and energy consumption evaluation. Concurrency Computat Pract Exper. 2019;e5504. https://doi.org/10.1002/cpe.5504
+
+
 In this project we aim to build a parallel benchmark to evaluate parallel programing interfaces (or parallel APIs).
 
 In our research we found out that there is no benchmark focused on comparing parallel programing interfaces.
