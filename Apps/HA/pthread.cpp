@@ -104,6 +104,7 @@ void sum(char* output) {
 	for (long unsigned int i = 1; i <= d; ++i) {
 		stringstreamA << digits[i];
 	}
+	stringstreamA << '\0';
 	string stringA = stringstreamA.str();
 	stringA.copy(output, stringA.size());
 }
