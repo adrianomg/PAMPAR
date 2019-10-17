@@ -81,21 +81,22 @@ void sum(char *output, int nFilhos){
     for (long unsigned int i = 1; i <= d; ++i) {
         stringstreamA << digits[i];
     }
+    stringstreamA << '\0';
     string stringA = stringstreamA.str();
     stringA.copy(output, stringA.size());
 }
  
 int main(int argc, char **argv){
 
-	if (argc < 5) {
-		printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <n-child-proc> <iterations> <input-size> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program 3 100000 100000 \"$PWD/child\"\n\n");
-		exit(1);
-	}
+    if (argc < 5) {
+	printf ("ERROR! Usage: mpirun -np <n-father-proc> my_program <n-child-proc> <iterations> <input-size> <child-exec>\n\n \tE.g. -> mpirun -np 1 ./my_program 3 100000 100000 \"$PWD/child\"\n\n");
+	exit(1);
+    }
 
-	#ifdef ELAPSEDTIME
-		struct timeval start, end;
-		gettimeofday(&start, NULL);
-	#endif
+#ifdef ELAPSEDTIME
+	struct timeval start, end;
+	gettimeofday(&start, NULL);
+#endif
     MPI_Init(&argc, &argv);
     MPI_Info localInfo;
     MPI_Info_create(&localInfo);
@@ -128,11 +129,11 @@ int main(int argc, char **argv){
    
     MPI_Finalize();
     
-	#ifdef ELAPSEDTIME
-		gettimeofday(&end, NULL);
-		double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + end.tv_usec - start.tv_usec) / 1.e6;
-		printf("Execution time\t%f\n", delta);
-	#endif
+#ifdef ELAPSEDTIME
+	gettimeofday(&end, NULL);
+	double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + end.tv_usec - start.tv_usec) / 1.e6;
+	printf("Execution time\t%f\n", delta);
+#endif
 
     return 0;
 }
