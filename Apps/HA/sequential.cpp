@@ -36,6 +36,7 @@ void sum(char* output, const long unsigned int d, const long unsigned int n) {
 	for (long unsigned int i = 1; i <= d; ++i) {
 		stringstreamA << digits[i];
 	}
+	stringstreamA << '\0';
 	string stringA = stringstreamA.str();
 	stringA.copy(output, stringA.size());
 }
