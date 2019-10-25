@@ -87,7 +87,7 @@ The classes names are:
 		
 These classes can be selected in the menu when running the run.sh script.
 	
-   **Examples of parameters of <input_problem> for each application using the "medium" class:**
+   **Examples of <input_problem> parameters for each application using the "medium" class:**
 
 	- DFT: 32368
 	-  DJ: 2048 adjacency_matrix.txt
