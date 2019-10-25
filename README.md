@@ -76,16 +76,14 @@ More details and studies on these applications can be found at: https://www.rese
   
   
   **Workload classes**
-  	PAMPAR has 3 classes of problems size and one aditional for debug pruposes.
-	The classes name are:
+  
+  PAMPAR has 3 classes of problems size and one aditional for debug pruposes.
+The classes names are:
 	
-		- Small
-		
-		- Medium
-		
-		- Large
-		
-		- Debug
+- Small	
+- Medium	
+- Large	
+- Debug
 		
 These classes can be selected in the menu when running the run.sh script.
 	
