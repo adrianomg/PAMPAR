@@ -5,11 +5,11 @@
  - Garcia, A. M., Schepke, C., Girardi, A. PAMPAR: A new parallel benchmark for performance and energy consumption evaluation. Concurrency Computation Practice Experience. 2019;e5504. https://doi.org/10.1002/cpe.5504
 
 
-In this project we aim to build a parallel benchmark to evaluate parallel programing interfaces (or parallel APIs).
+In this project we aim to build a suite of parallel benchmarks to evaluate parallel programing interfaces (parallel models).
 
 In our research we found out that there is no benchmark focused on comparing parallel programing interfaces.
 
-This is a initial work and we still updating these applications. Currently the benchmark consists of 13 parallel pseudo-applications, each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation).
+This is a initial work and we still updating these applications. Currently the suite consists of 13 parallel benchmarks (pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation).
 
 The pseudo-aplications are:
   - Pi Caluculation       (PI);
