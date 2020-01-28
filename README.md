@@ -9,7 +9,7 @@ In this project we aim to build a suite of parallel benchmarks to evaluate paral
 
 In our research we found out that there is no benchmark focused on comparing parallel programing interfaces.
 
-This is a initial work and we still updating these applications. Currently the suite consists of 13 parallel benchmarks (pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation).
+This is a initial work and we still updating these applications. Currently, the suite consists of 13 parallel benchmarks (kernels and pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation).
 
 The pseudo-aplications are:
   - Pi Caluculation       (PI);
@@ -28,7 +28,7 @@ The pseudo-aplications are:
   
   (GL and SH still need some polishing)
 
-The goal is to paralelize the set using more interfaces and add new pseudo-aplications according to the demand.
+The goal is to paralelize the set using more interfaces and add new benchmarks according to the demand.
 
 More details and studies on these applications can be found at: https://www.researchgate.net/project/A-Parallel-Benchmark-for-Performance-Evaluation-and-Energy-Consumption-in-Multicore-and-Manycore-Architectures
 
