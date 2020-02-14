@@ -9,9 +9,9 @@ In this project we aim to build a suite of parallel benchmarks to evaluate paral
 
 In our research we found out that there is no benchmark focused on comparing parallel programing interfaces.
 
-This is a initial work and we still updating these applications. Currently, the suite consists of 13 parallel benchmarks (synthetic, kernels, and pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation).
+This is a initial work and we still updating these applications. Currently, the suite consists of 13 parallel benchmarks (micro, kernels, and pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation).
 
-The synthetic benchmarks are:
+The micro benchmarks are:
   - Pi Caluculation       (PI);
   - Dot Produtct          (DP);
   - Numeric Integration   (NI);
