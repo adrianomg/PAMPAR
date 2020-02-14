@@ -9,24 +9,28 @@ In this project we aim to build a suite of parallel benchmarks to evaluate paral
 
 In our research we found out that there is no benchmark focused on comparing parallel programing interfaces.
 
-This is a initial work and we still updating these applications. Currently, the suite consists of 13 parallel benchmarks (kernels and pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation).
+This is a initial work and we still updating these applications. Currently, the suite consists of 13 parallel benchmarks (synthetic, kernels, and pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation).
 
-The pseudo-aplications are:
+The synthetic benchmarks are:
   - Pi Caluculation       (PI);
   - Dot Produtct          (DP);
   - Numeric Integration   (NI);
+
+The kernel benchmarks are:
   - Odd-Even Sort         (OE);
   - Harmonic Sums         (HA);
   - Disc. Fourier Transf. (DFT);
-  - Turing Ring           (TR);
-  - Dijkstra Shortest Path(DJ);
-  - Jacobi Method         (JA);
   - Matrix Multiplication (MM);
   - Gram-Schmidt Process  (GS).
+  - Jacobi Method         (JA);
+  
+The pseudo-applications are:
+  - Turing Ring           (TR);
+  - Dijkstra Shortest Path(DJ);
   - Histograms Similarity (SH);
   - Game of Life          (GL);
   
-  (GL and SH still need some polishing)
+  (GL and SH still need some polishing. Any help is welcome!)
 
 The goal is to paralelize the set using more interfaces and add new benchmarks according to the demand.
 
