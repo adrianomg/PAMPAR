@@ -1,6 +1,6 @@
 # PAMPAR
 
-**How to cite this work:**
+**To cite this work:**
 
  - Garcia, A. M., Schepke, C., Girardi, A. PAMPAR: A new parallel benchmark for performance and energy consumption evaluation. Concurrency Computation Practice Experience. 2019;e5504. https://doi.org/10.1002/cpe.5504
 
