@@ -23,14 +23,14 @@ The kernel benchmarks are:
   - Matrix Multiplication (MM);
   - Gram-Schmidt Process  (GS).
   - Jacobi Method         (JA);
-  
+  - Dijkstra Shortest Path(DJ);
+
 The pseudo-applications are:
   - Turing Ring           (TR);
-  - Dijkstra Shortest Path(DJ);
   - Histograms Similarity (SH);
   - Game of Life          (GL);
   
-  (GL and SH still need some polishing. Any help is welcome!)
+  (GL-MPI and SH still need some polishing. Any help is welcome!)
 
 The goal is to paralelize the set using more interfaces and add new benchmarks according to the demand.
 
