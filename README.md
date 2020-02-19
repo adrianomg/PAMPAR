@@ -11,7 +11,7 @@ In our research we found out that there is no benchmark focused on comparing par
 
 This is a initial work and we still updating these applications. Currently, the suite consists of 13 parallel benchmarks (micro, kernels, and pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation). We also offer a clean serial version to be used as base result and to ease implementations using new programming models.
 
-**Suite details**
+**Table: Suite details.**
 | Benchmark | Acronym | Set | Complexity | Domain |
 | --- | :---: | :---: | :---: | --- |
 | Pi Caluculation       | PI | Micro | O(n) | Math | 
