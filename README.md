@@ -16,7 +16,7 @@ This is a initial work and we still updating these applications. Currently, the 
 | --- | :---: | :---: | :---: | --- |
 | Pi Caluculation       | PI | Micro | O(n) | Math | 
 | Dot Produtct          | DP | Micro | O(n) | Linear Algebra | 
-| Numeric Integration   | NI | Micro | O(n) | Math |
+| Numeric Integration   | NI | Micro | O(n) | Physics |
 | Odd-Even Sort         | OE | Kernel | O(n²) | Sorting Algorithms |
 | Harmonic Sums         | HA | Kernel | O(n×d) | Physics |
 | Disc. Fourier Transf. | DFT | Kernel | O(n²) | Digital Signal Processing |
