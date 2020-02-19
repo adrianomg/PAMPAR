@@ -18,7 +18,7 @@ This is a initial work and we still updating these applications. Currently, the 
 | Dot Produtct          | DP | Micro | O(n) | Linear Algebra | 
 | Numeric Integration   | NI | Micro | O(n) | Physics |
 | Odd-Even Sort         | OE | Kernel | O(n²) | Sorting Algorithms |
-| Harmonic Sums         | HA | Kernel | O(n×d) | Physics |
+| Harmonic Sums         | HA | Kernel | O(n×d) | Physics, Engineering |
 | Disc. Fourier Transf. | DFT | Kernel | O(n²) | Digital Signal Processing |
 | Matrix Multiplication | MM | Kernel | O(n³) | Linear Algebra |
 | Gram-Schmidt Process  | GS | Kernel | O(n³) | Linear Algebra |
