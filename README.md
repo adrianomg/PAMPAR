@@ -9,7 +9,7 @@ In this project we aim to build a suite of parallel benchmarks to evaluate paral
 
 In our research we found out that there is no benchmark focused on comparing parallel programing interfaces.
 
-This is a initial work and we still updating these applications. Currently, the suite consists of 13 parallel benchmarks (micro, kernels, and pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation).
+This is a initial work and we still updating these applications. Currently, the suite consists of 13 parallel benchmarks (micro, kernels, and pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation). We also offer a clean serial version to be used as base result and to ease implementations using new programming models.
 
 The micro benchmarks are:
   - Pi Caluculation       (PI);
@@ -29,6 +29,23 @@ The pseudo-applications are:
   - Turing Ring           (TR);
   - Histograms Similarity (SH);
   - Game of Life          (GL);
+  
+| Benchmark | Acronym | Set | Complexity | Domain |
+| --- | :---: | :---: | :---: | --- |
+| Pi Caluculation       | PI | Micro | O(n) | Math | 
+| Dot Produtct          | DP | Micro | O(n) | Linear Algebra | 
+| Numeric Integration   | NI | Micro | O(n) | Math |
+| Odd-Even Sort         | OE | Kernel | O(n²) | Sorting |
+| Harmonic Sums         | HA | Kernel | O(n×d) | Physics |
+| Disc. Fourier Transf. | DFT | Kernel | O(n²) | digital signal processing |
+| Matrix Multiplication | MM | Kernel | O(n³) | Linear Algebra |
+| Gram-Schmidt Process  | GS | Kernel | O(n³) | Linear Algebra |
+| Jacobi Method         | JA | Kernel | O(n³) | Linear Algebra |
+| Dijkstra Shortest Path| DJ | Kernel | O(n³) | Graphs |
+| Turing Ring           | TR | Pseudo-application | O(m×n²) | Chemistry, Biology |
+| Histograms Similarity | SH | Pseudo-application | O(n³) | Image Processing |
+| Game of Life          | GL | Pseudo-application | O(n³) | Cellular Automata, Physics |
+  
   
   (GL-MPI and SH still need some polishing. Any help is welcome!)
 
