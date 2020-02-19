@@ -17,16 +17,16 @@ This is a initial work and we still updating these applications. Currently, the 
 | Pi Caluculation       | PI | Micro | O(n) | Math | 
 | Dot Produtct          | DP | Micro | O(n) | Linear Algebra | 
 | Numeric Integration   | NI | Micro | O(n) | Math |
-| Odd-Even Sort         | OE | Kernel | O(n²) | Sorting |
+| Odd-Even Sort         | OE | Kernel | O(n²) | Sorting Algorithms |
 | Harmonic Sums         | HA | Kernel | O(n×d) | Physics |
 | Disc. Fourier Transf. | DFT | Kernel | O(n²) | Digital Signal Processing |
 | Matrix Multiplication | MM | Kernel | O(n³) | Linear Algebra |
 | Gram-Schmidt Process  | GS | Kernel | O(n³) | Linear Algebra |
 | Jacobi Method         | JA | Kernel | O(n³) | Linear Algebra |
 | Dijkstra Shortest Path| DJ | Kernel | O(n³) | Graphs |
-| Turing Ring           | TR | Pseudo-application | O(m×n²) | Chemistry, Biology |
-| Histograms Similarity | SH | Pseudo-application | O(n³) | Image Processing |
-| Game of Life          | GL | Pseudo-application | O(n³) | Cellular Automata, Physics |
+| Turing Ring           | TR | Pseudo-application | O(m×n²) | Chemistry, Biological Simulation|
+| Histograms Similarity | SH | Pseudo-application | O(n³) | Image Processing, Pattern Recognition |
+| Game of Life          | GL | Pseudo-application | O(n³) | Cellular Automata, Physics Simulation |
   
   
   (GL-MPI and SH still need some polishing. Any help is welcome!)
