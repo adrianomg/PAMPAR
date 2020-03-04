@@ -99,24 +99,19 @@ int main(int argc, char **argv){
 		int rank;
 		MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 		MPI_Comm_get_parent(&interCommPai);
-	
-
-		//int i;
-		//for(i=0;i<7;i++)
-		//	printf("arg %d = %s\n", i, argv[i]);
 
 		N = atoi(argv[2]);
-		
 		int numFilhos = atoi(argv[4]);
 		size = numFilhos+1;
 		vetIndice = malloc(sizeof(int)*size*4);
 		vetor = malloc(sizeof(int)*N);
+		
 		leEntrada();
+		
 		MPI_Recv(&vetIndice[0], size*4, MPI_INT, 0, 99, interCommPai, MPI_STATUS_IGNORE);
 		
 		bubbleSort(rank);
-
+		
 		MPI_Finalize();
-
 		return 0;
 }
