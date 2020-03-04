@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/time.h>
+#include <time.h>
 
 int N = 0, *vetIndices, *vetor, size, indice;
 MPI_Comm interComm;
@@ -93,8 +93,7 @@ void leEntrada(){
 int main(int argc, char **argv){
 
 	#ifdef ELAPSEDTIME
-		struct timeval start, end;
-		gettimeofday(&start, NULL);
+		clock_t start2 = clock();
 	#endif
 	
 	MPI_Init(&argc, &argv);
@@ -116,11 +115,10 @@ int main(int argc, char **argv){
 	int err[1], i;
 		
 	for(i=argc;i<6;i++)
-		argv[i] = malloc(sizeof(char)*20);
+		argv[i] = malloc(sizeof(char)*50);
 	
 	sprintf(argv[4], "%d", numFilhos);
 	sprintf(argv[5], "%d", indice);
-	
 	
 	MPI_Comm_spawn(bin, argv, numFilhos, localInfo, 0, MPI_COMM_SELF, &interComm, err);
 	
@@ -128,14 +126,13 @@ int main(int argc, char **argv){
 		MPI_Send(&vetIndices[0], size*4, MPI_INT, i, 99, interComm);
 	
 	bubbleSort();	
-	
-	MPI_Finalize();
-	
-	#ifdef ELAPSEDTIME
-		gettimeofday(&end, NULL);
-		double delta = ((end.tv_sec  - start.tv_sec) * 1000000u + end.tv_usec - start.tv_usec) / 1.e6;
-		printf("Excution time\t%f\n", delta);
-	#endif
 
+	MPI_Finalize();
+
+	#ifdef ELAPSEDTIME
+		clock_t stop = clock();
+		double elapsed_time = (double)(stop - start2) / CLOCKS_PER_SEC;
+		printf("Execution time\t%f\n", elapsed_time);
+	#endif
 	return 0;
 }
