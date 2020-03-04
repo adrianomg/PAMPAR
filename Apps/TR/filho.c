@@ -3,7 +3,7 @@
 #include <mpi.h>
 
 struct ring{
-		int X, Y;
+	int X, Y;
 };
 typedef struct ring TipoRing;
 
@@ -109,37 +109,23 @@ void ajustaChunk(int *vetChunk, int *vetFim, int *vetIni, int size, int N){
 }
 
 void ativaIrecv(int rank, int size, TipoRing *jogo, int *vetFim, int *vetIni, int N){
-//	printf("SERA QUE MAIS GENTE ATIVOU?\n");
 	if(size == 2){
 		MPI_Irecv(&jogo[(vetFim[rank]-1)*N], N, MPI_INT, rank, 49, intercommPai, &req[0]);
 	}else if(size > 2 && size % 2 == 0){
 		if(rank != 0 && rank % 2 == 0 && rank != (size-2)){
-			//printf("RECV Rank: %d Rank esperado: PAR\n", rank);
-			//printf("RANK: %d\tRECEBE DE RANK: %d\tNO CANAL: %d\n", rank, rank-1, (((rank-1)*100)+99));
-			MPI_Irecv(&jogo[(vetFim[rank]-1)*N], N, MPI_INT, rank-1, (((rank-1)*100)+99), MPI_COMM_WORLD, &req[0]); //ok
-			//printf("RANK: %d\tRECEBE DE RANK: %d\tNO CANAL: %d\n", rank, rank+1, (((rank+1)*100)+49));
-			MPI_Irecv(&jogo[(vetIni[rank+2]*N)], N, MPI_INT, rank+1, (((rank+1)*100)+49), MPI_COMM_WORLD, &req[1]);// ok
+			MPI_Irecv(&jogo[(vetFim[rank]-1)*N], N, MPI_INT, rank-1, (((rank-1)*100)+99), MPI_COMM_WORLD, &req[0]);
+			MPI_Irecv(&jogo[(vetIni[rank+2]*N)], N, MPI_INT, rank+1, (((rank+1)*100)+49), MPI_COMM_WORLD, &req[1]);
 
 		}else if(rank == 0){
-			
-			//printf("RECV Rank: %d Rank esperado: 0\n", rank);
-			//printf("RANK: %d\tRECEBE DE RANK: PAI\tNO CANAL: %d\n", rank, 49);
 			MPI_Irecv(&jogo[(vetFim[rank]-1)*N], N, MPI_INT, rank, 49, intercommPai, &req[0]);
-			//printf("RANK: %d\tRECEBE DE RANK: %d\tNO CANAL: %d\n", rank, rank+1, (((rank+1)*100)+49));
 			MPI_Irecv(&jogo[(vetIni[rank+2]*N)], N, MPI_INT, rank+1, (((rank+1)*100)+49), MPI_COMM_WORLD, &req[1]);
 
 		}else if(rank == (size-2)){
-			//printf("RECV Rank: %d Rank esperado: ultimo\n", rank);
-			//printf("RANK: %d\tRECEBE DE RANK: %d\tNO CANAL: %d\n", rank, rank-1, (((rank-1)*100)+99));
 			MPI_Irecv(&jogo[(vetFim[rank]-1)*N], N, MPI_INT, rank-1, (((rank-1)*100)+99), MPI_COMM_WORLD, &req[0]);
 
 		}else if (rank % 2 != 0 && rank != (size-2)){
-			//printf("RECV Rank: %d Rank esperado: IMPAR\n", rank);
-			//printf("RANK: %d\tRECEBE DE RANK: %d\tNO CANAL: %d\n", rank, rank+1, (((rank+1)*100)+49));
-			MPI_Irecv(&jogo[(vetIni[rank+2]*N)], N, MPI_INT, rank+1, (((rank+1)*100)+49), MPI_COMM_WORLD, &req[0]);       //ok
-			//printf("RANK: %d\tRECEBE DE RANK: %d\tNO CANAL: %d\n", rank, rank-1, (((rank-1)*100)+99));
-			MPI_Irecv(&jogo[(vetFim[rank]-1)*N], N, MPI_INT, rank-1, (((rank-1)*100)+99), MPI_COMM_WORLD, &req[1]);// ok
-
+			MPI_Irecv(&jogo[(vetIni[rank+2]*N)], N, MPI_INT, rank+1, (((rank+1)*100)+49), MPI_COMM_WORLD, &req[0]); 
+			MPI_Irecv(&jogo[(vetFim[rank]-1)*N], N, MPI_INT, rank-1, (((rank-1)*100)+99), MPI_COMM_WORLD, &req[1]);
 		}
 	}
 }
@@ -151,27 +137,15 @@ void trocaDados(int rank, int size, TipoRing *jogo, int *vetFim, int *vetIni, in
 		MPI_Wait(&req[0], MPI_STATUS_IGNORE);
 	}else{
 		if(rank == 0){
-			//printf("SEND Rank: %d Rank esperado: 0\n", rank);
-			//printf("RANK: %d\tENVIA PRA RANK: PAI\tNO CANAL: %d\n", rank, 9);
 			MPI_Send(&jogo[(vetIni[rank+1]*N)], N, MPI_INT, rank, 9, intercommPai);
-			//printf("SEND Rank: %d PRO PAI - COMPLETE\n", rank);
-			//printf("RANK: %d\tENVIA PRA RANK: %d\tNO CANAL: %d\n", rank, rank+1, 99);
 			MPI_Send(&jogo[(vetFim[rank+1]-1)*N], N, MPI_INT, rank+1, 99, MPI_COMM_WORLD);
-			//printf("SEND Rank: %d PRO N1  - COMPLETE\n", rank);
 			MPI_Wait(&req[0], MPI_STATUS_IGNORE);
-			//printf("SEND Rank: %d WAITING PAI\n", rank);
 			MPI_Wait(&req[1], MPI_STATUS_IGNORE);
-			//printf("SEND Rank: %d WAITING N1\n", rank);
 		}else if(rank == (size-2)){
-		//	printf("SEND Rank: %d Rank esperado: ultimo\n", rank);
-			//printf("RANK: %d\tENVIA PRA RANK: %d\tNO CANAL: %d\n", rank, rank-1, ((rank*100)+49));
 			MPI_Send(&jogo[(vetIni[rank+1]*N)], N, MPI_INT, rank-1, ((rank*100)+49), MPI_COMM_WORLD);
 			MPI_Wait(&req[0], MPI_STATUS_IGNORE);
-		}else{// if(rank != 0 && rank != (size-2)){
-		//	printf("SEND Rank: %d Rank esperado: QUALQUER\n", rank);
-			//printf("RANK: %d\tENVIA PRA RANK: %d\tNO CANAL: %d\n", rank, rank-1, ((rank*100)+49));
+		}else{
 			MPI_Send(&jogo[(vetIni[rank+1]*N)], N, MPI_INT, rank-1, ((rank*100)+49), MPI_COMM_WORLD);
-			//printf("RANK: %d\tENVIA PRA RANK: %d\tNO CANAL: %d\n", rank, rank+1, ((rank*100)+99));
 			MPI_Send(&jogo[(vetFim[rank+1]-1)*N], N, MPI_INT, rank+1, ((rank*100)+99), MPI_COMM_WORLD);
 			MPI_Wait(&req[0], MPI_STATUS_IGNORE);
 			MPI_Wait(&req[1], MPI_STATUS_IGNORE);
