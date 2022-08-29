@@ -4,12 +4,9 @@
 
  - Garcia, A. M., Schepke, C., Girardi, A. PAMPAR: A new parallel benchmark for performance and energy consumption evaluation. Concurrency Computation Practice Experience. 2019;e5504. https://doi.org/10.1002/cpe.5504
 
-
 In this project we aim to build a suite of parallel benchmarks to evaluate parallel programing interfaces (parallel models).
 
-In our research we found out that there is no benchmark focused on comparing parallel programing interfaces.
-
-This is a initial work and we still updating these applications. Currently, the suite consists of 13 parallel benchmarks (micro, kernels, and pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation). We also offer a clean serial version to be used as base result and to ease implementations using new programming models.
+Currently, the suite consists of 13 parallel benchmarks (micro, kernels, and pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation). We also offer a clean serial version to be used as base result and to ease implementations using new programming models.
 
 **Table: Suite details.**
 | Benchmark | Acronym | Set | Complexity | Domain |
@@ -35,9 +32,7 @@ The goal is to paralelize the set using more interfaces and add new benchmarks a
 
 More details and studies on these applications can be found at: https://www.researchgate.net/project/A-Parallel-Benchmark-for-Performance-Evaluation-and-Energy-Consumption-in-Multicore-and-Manycore-Architectures
 
-
 **How to run:**
-
 
   - To compile all the pseudo-applications, go to the PAMPAR root directory and run:
   
@@ -80,8 +75,7 @@ More details and studies on these applications can be found at: https://www.rese
   
   **Workload classes**
   
-  PAMPAR has 3 classes of problems size and one aditional for debug purposes.
-The classes names are:
+PAMPAR has four workload classes, which are:
 	
 - Small	
 - Medium	
