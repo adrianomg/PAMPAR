@@ -4,6 +4,24 @@
 
  - Garcia, A. M., Schepke, C., Girardi, A. PAMPAR: A new parallel benchmark for performance and energy consumption evaluation. Concurrency Computation Practice Experience. 2019;e5504. https://doi.org/10.1002/cpe.5504
 
+Bibtex:
+
+```bibtex
+@article{GARCIA:PAMPAR:2020,
+  author = {Marques Garcia, Adriano and Schepke, Claudio and Girardi, Alessandro},
+  title = {PAMPAR: A new parallel benchmark for performance and energy consumption evaluation},
+  journal = {Concurrency and Computation: Practice and Experience},
+  volume = {32},
+  number = {20},
+  pages = {e5504},
+  doi = {https://doi.org/10.1002/cpe.5504},
+  url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/cpe.5504},
+  eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1002/cpe.5504},
+  note = {e5504 cpe.5504},
+  year = {2020}
+}
+```
+
 In this project we aim to build a suite of parallel benchmarks to evaluate parallel programing interfaces (parallel models).
 
 Currently, the suite consists of 13 parallel benchmarks (micro, kernels, and pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation). We also offer a clean serial version to be used as base result and to ease implementations using new programming models.
