@@ -22,9 +22,9 @@ Bibtex:
 }
 ```
 
-PAMPAR is a parallel benchmark suite that provides a wide set of benchmarks, all parallelized using four state-of-art parallel programing interfaces (parallel libraries).
+PAMPAR is a parallel benchmark suite that provides a broad set of benchmarks, all parallelized using four state-of-art parallel programming interfaces (parallel libraries).
 
-Currently, the suite consists of 13 parallel benchmarks (micro, kernels, and pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation). It also offer a clean serial version to be used as base result and to ease implementations using new programming models.
+Currently, the suite consists of 13 parallel benchmarks (micro, kernels, and pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation). It also offers a clean serial version to be used as a base result and to ease implementations using new programming models.
 
 **Table: Suite details.**
 | Benchmark | Acronym | Set | Complexity | Domain |
@@ -46,7 +46,7 @@ Currently, the suite consists of 13 parallel benchmarks (micro, kernels, and pse
   
   (GL-MPI and SH still need some polishing. Any help is welcome!)
 
-The goal is to paralelize the set using more interfaces and add new benchmarks according to the demand.
+The goal for the future is to paralelize the set using more interfaces and add new benchmarks.
 
 More details and studies on these applications can be found at: https://www.researchgate.net/project/A-Parallel-Benchmark-for-Performance-Evaluation-and-Energy-Consumption-in-Multicore-and-Manycore-Architectures
 
