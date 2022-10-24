@@ -69,7 +69,7 @@ More details and studies on these applications can be found at: https://www.rese
   
   - To run a PThread or OpenMP application, run:
     
-    	~$ ./<executable> <number_of_threads> <input_problem>
+    	~$ ./<binary_file> <number_of_threads> <input_problem>
     
     Example: 
     	`~$ ./pthread 4 2048`
@@ -77,7 +77,7 @@ More details and studies on these applications can be found at: https://www.rese
     
   - To run a MPI-1 application, run:
   
-  	`~$ mpirun -np <number_of_processes> <executable> <input_problem>`
+  	`~$ mpirun -np <number_of_processes> <binary_file> <input>`
     
     Example: 
     	`~$ mpirun -np 4 ./mpi1 2048`
@@ -85,7 +85,7 @@ More details and studies on these applications can be found at: https://www.rese
     
   - To run a MPI-2 application, run:
  
- 	`~$ mpirun -np 1 <executable> <number_of_child_processes> <input_problem> <child_executable>`
+ 	`~$ mpirun -np 1 <binary_file> <number_of_child_processes> <input> <child_binary_file>`
     
     Example: 
     	`~$ mpirun -np 1 ./pai 3 2048 ./filho`
@@ -102,7 +102,7 @@ PAMPAR has four workload classes, which are:
 		
 These classes can be selected in the menu when running the run.sh script.
 	
-   **Examples of <input_problem> parameters for each application using the "medium" class:**
+   **Examples of <input> parameters for each application using the "medium" class:**
 
 	- DFT: 32368
 	-  DJ: 2048 adjacency_matrix.txt
