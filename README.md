@@ -51,6 +51,8 @@ The goal for the future is to parallelize the set using more interfaces and add 
 More details and evaluations on these applications can be found at: [Towards a benchmark for performance and power consumption evaluation of parallel programming interfaces](https://repositorio.unipampa.edu.br/jspui/handle/riu/4136) (master thesis)
 
 **How to run:**
+  
+  - The most recent tests of the benchmarks were on a computer with Ubuntu 18.04.2 with Linux version 4.15.0-45 and using Intel ICC 18.0.1 compiler.
 
   - To compile all the pseudo-applications, go to the PAMPAR root directory and run:
   
