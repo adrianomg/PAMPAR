@@ -22,15 +22,15 @@ Bibtex:
 }
 ```
 
-PAMPAR is a parallel benchmark suite that provides a broad set of benchmarks, all parallelized using four state-of-art parallel programming interfaces (parallel libraries).
+PAMPAR is a parallel benchmark suite that provides a broad set of benchmarks. All are parallelized using three state-of-the-art parallel programming interfaces (parallel libraries), including two different MPI implementations (dynamic and static process spawning).
 
-Currently, the suite consists of 13 parallel benchmarks (micro, kernels, and pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1, and MPI-2 (dynamic processes creation). It also offers a clean serial version to be used as a base result and to ease implementations using new programming models.
+Currently, the suite consists of 13 parallel benchmarks (micro, kernels, and pseudo-applications), each parallelized using PThreads, OpenMP, MPI-1 (static process spawning), and MPI-2 (dynamic process spawning). It also offers a clean serial version to be used as a base benchmark and to ease extending it with implementations using new programming models.
 
 **Table: Suite details.**
 | Benchmark | Acronym | Set | Complexity | Domain |
 | --- | :---: | :---: | :---: | --- |
 | Pi Caluculation       | PI | Micro | O(n) | Math | 
-| Dot Produtct          | DP | Micro | O(n) | Linear Algebra | 
+| Dot Product           | DP | Micro | O(n) | Linear Algebra | 
 | Numeric Integration   | NI | Micro | O(n) | Physics |
 | Odd-Even Sort         | OE | Kernel | O(n²) | Sorting Algorithms |
 | Harmonic Sums         | HA | Kernel | O(n×d) | Physics, Engineering |
@@ -46,9 +46,9 @@ Currently, the suite consists of 13 parallel benchmarks (micro, kernels, and pse
   
   (GL-MPI and SH still need some polishing. Any help is welcome!)
 
-The goal for the future is to paralelize the set using more interfaces and add new benchmarks.
+The goal for the future is to parallelize the set using more interfaces and add new benchmarks.
 
-More details and studies on these applications can be found at: https://www.researchgate.net/project/A-Parallel-Benchmark-for-Performance-Evaluation-and-Energy-Consumption-in-Multicore-and-Manycore-Architectures
+More details and studies on these applications can be found at: [Towards a benchmark for performance and power consumption evaluation of parallel programming interfaces](https://repositorio.unipampa.edu.br/jspui/handle/riu/4136) (master thesis)
 
 **How to run:**
 
@@ -56,7 +56,7 @@ More details and studies on these applications can be found at: https://www.rese
   
 	`~$ make`
     
-  - You can run the 'run.sh' script and follow the steps to setup and run the benchmark.
+  - You can run the 'run.sh' script and follow the steps to set up and run the benchmark.
   
   	`~$ bash run.sh`
     
@@ -75,7 +75,7 @@ More details and studies on these applications can be found at: https://www.rese
     	`~$ ./pthread 4 2048`
    
     
-  - To run a MPI-1 application, run:
+  - To run an MPI-1 application, run:
   
   	`~$ mpirun -np <number_of_processes> <binary_file> <input>`
     
@@ -83,7 +83,7 @@ More details and studies on these applications can be found at: https://www.rese
     	`~$ mpirun -np 4 ./mpi1 2048`
     
     
-  - To run a MPI-2 application, run:
+  - To run an MPI-2 application, run:
  
  	`~$ mpirun -np 1 <binary_file> <number_of_child_processes> <input> <child_binary_file>`
     
