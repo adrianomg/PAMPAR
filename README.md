@@ -48,7 +48,7 @@ Currently, the suite consists of 13 parallel benchmarks (micro, kernels, and pse
 
 The goal for the future is to parallelize the set using more interfaces and add new benchmarks.
 
-More details and studies on these applications can be found at: [Towards a benchmark for performance and power consumption evaluation of parallel programming interfaces](https://repositorio.unipampa.edu.br/jspui/handle/riu/4136) (master thesis)
+More details and evaluations on these applications can be found at: [Towards a benchmark for performance and power consumption evaluation of parallel programming interfaces](https://repositorio.unipampa.edu.br/jspui/handle/riu/4136) (master thesis)
 
 **How to run:**
 
