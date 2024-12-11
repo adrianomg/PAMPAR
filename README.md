@@ -52,45 +52,52 @@ More details and evaluations on these applications can be found at: [Towards a b
 
 **How to run:**
   
-  - The most recent tests of the benchmarks were on a computer with Ubuntu 18.04.2 with Linux version 4.15.0-45 and using Intel ICC 18.0.1 compiler.
+The most recent tests of the benchmarks were on a computer with Ubuntu 18.04.2 with Linux version 4.15.0-45 and using Intel ICC 18.0.1 compiler.
 
-  - To compile all the pseudo-applications, go to the PAMPAR root directory and run:
+To compile all the pseudo-applications, go to the PAMPAR root directory and run:
   
-	`~$ make`
+	make
+
+It is a very simple Makefile. It cannot compile specific targets and will try to compile all the applications with OpenMP, MPI, and PThreads.
+Therefore, you have to ensure you have all dependencies installed and loaded.
     
-  - You can run the 'run.sh' script and follow the steps to set up and run the benchmark.
+You can run the 'run.sh' script and follow the steps to set up and run the benchmark.
   
-  	`~$ bash run.sh`
+	bash run.sh
     
-  It will run the pseudo-applications according to the setup and give the execution time for each case.
-  
+It will run the pseudo-applications according to the setup and give the execution time for each case.
+It is a basic script and will not chek wheather benchamrks were compiled and can run properly.
+If you do not ensure that, this script is very likely to fail mid-execution.
 
 **How to run manually:**
 
-  - Compile the applications using the Makefile
+  - Compile the applications using the Makefile (or manually)
   
   - To run a PThread or OpenMP application, run:
     
-    	~$ ./<binary_file> <number_of_threads> <input_problem>
+    	./<binary_file> <number_of_threads> <input_problem>
     
-    Example: 
-    	`~$ ./pthread 4 2048`
+    Example:
+    
+    	./pthread 4 2048
    
     
   - To run an MPI-1 application, run:
   
-  	`~$ mpirun -np <number_of_processes> <binary_file> <input>`
+    	mpirun -np <number_of_processes> <binary_file> <input>
     
-    Example: 
-    	`~$ mpirun -np 4 ./mpi1 2048`
+    Example:
+     
+    	mpirun -np 4 ./mpi1 2048
     
     
   - To run an MPI-2 application, run:
  
- 	`~$ mpirun -np 1 <binary_file> <number_of_child_processes> <input> <child_binary_file>`
+    	mpirun -np 1 <binary_file> <number_of_child_processes> <input> <child_binary_file>
     
     Example: 
-    	`~$ mpirun -np 1 ./pai 3 2048 ./filho`
+
+    	mpirun -np 1 ./pai 3 2048 ./filho
   
   
   **Workload classes**
